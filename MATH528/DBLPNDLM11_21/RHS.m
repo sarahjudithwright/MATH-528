@@ -1,0 +1,19 @@
+function output = RHS(t,y)
+    m1 = 1;
+    m2 = 1;
+    g = 9.81;
+    L1 = 1; 
+    L2 = 1;
+    theta1 = y(1);
+    theta2 = y(2);
+    omega1 = y(3);
+    omega2 = y(4);
+    a = (-g*(2*m1+m2)*sin(theta1)-m2*g*sin(theta1-2*theta2)-2*sin(theta1-theta2)*m2*(L2*omega2.^2+L1*cos(theta1-theta2)*omega1.^2))/(L1*(2*m1+m2-m2*cos(2*theta1-2*theta2)));
+    %a = (-g*(2*m1+m2)*sin(theta1)-m2*g*sin(theta1-2*theta2)-2*sin(theta1-theta2)*m2*(omega2^2*L2+omega1^2*L1*cos(theta1-theta2)))/(L1*(2*m1+m2-m2*cos(2*theta1-2*theta2)));
+b = (2*sin(theta1-theta2)*(L1*(m1+m2)*omega1.^2+g*(m1+m2)*cos(theta1)+L2*m2*cos(theta1-theta2)*omega2.^2))/(L2*(2*m1+m2-m2*cos(2*theta1-2*theta2)));
+    output = 0*y;
+    output(1) = y(3);
+    output(2) = y(4);
+    output(3) = a;
+    output(4) = b;
+end
